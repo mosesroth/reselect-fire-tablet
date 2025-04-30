@@ -4,13 +4,7 @@ import { createSelector } from 'reselect';
 export const getTodos = state => state.todos.todos;
 export const getFilter = state => state.todos.filter;
 export const getCategoryFilter = state => state.todos.categoryFilter;
-export const getUsers = state => state.users.users;
-export const getCurrentUserId = state => state.users.currentUserId;
-export const getTheme = state => state.ui.theme;
-export const getLoading = state => state.ui.loading;
 export const getSortOrder = state => state.ui.sortOrder;
-
-// Memoized selectors using reselect
 
 // Get filtered todos based on completion status
 export const getFilteredTodos = createSelector(
@@ -67,66 +61,6 @@ export const getTodoStats = createSelector(
       completed,
       active,
       percentCompleted
-    };
-  }
-);
-
-// Get category statistics
-export const getCategoryStats = createSelector(
-  [getTodos],
-  (todos) => {
-    const categories = {};
-    
-    todos.forEach(todo => {
-      if (!categories[todo.category]) {
-        categories[todo.category] = {
-          total: 0,
-          completed: 0
-        };
-      }
-      
-      categories[todo.category].total += 1;
-      if (todo.completed) {
-        categories[todo.category].completed += 1;
-      }
-    });
-    
-    return categories;
-  }
-);
-
-// Get current user
-export const getCurrentUser = createSelector(
-  [getUsers, getCurrentUserId],
-  (users, currentUserId) => {
-    return users.find(user => user.id === currentUserId) || null;
-  }
-);
-
-// Get admin users
-export const getAdminUsers = createSelector(
-  [getUsers],
-  (users) => {
-    return users.filter(user => user.role === 'admin');
-  }
-);
-
-// Get regular users
-export const getRegularUsers = createSelector(
-  [getUsers],
-  (users) => {
-    return users.filter(user => user.role === 'user');
-  }
-);
-
-// Complex selector that combines multiple pieces of state
-export const getAppSummary = createSelector(
-  [getTodoStats, getCurrentUser, getTheme],
-  (todoStats, currentUser, theme) => {
-    return {
-      todoStats,
-      currentUser,
-      theme
     };
   }
 );

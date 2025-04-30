@@ -10,9 +10,9 @@ This is a React Native application that demonstrates the usage of Reselect for e
 
 - Basic selectors for filtering and statistics
 - Complex selectors with multiple inputs
-- Performance comparison between memoized and non-memoized selectors
 - Interactive filter controls
-- Factory selectors demonstration
+- Error boundaries for improved stability
+- Optimized for performance on Fire tablets
 
 ## Technologies Used
 
@@ -25,11 +25,12 @@ This is a React Native application that demonstrates the usage of Reselect for e
 
 ## Project Structure
 
-- `app/redux/store.js`: Redux store configuration with sample data
+- `app/redux/store.js`: Simplified Redux store configuration
 - `app/redux/selectors.js`: Reselect selectors implementation
-- `app/components/BasicSelectors.js`: Basic usage of selectors
-- `app/components/ComplexSelectors.js`: Advanced selector composition
-- `app/components/SelectorPerformance.js`: Performance comparison
+- `app/components/SimpleTodoList.js`: Todo list with memoized selectors
+- `app/components/FilterControls.js`: UI controls for filtering and sorting
+- `app/components/ReselectInfo.js`: Information about Reselect
+- `app/components/ErrorBoundary.js`: Error handling component
 
 ## About Reselect
 

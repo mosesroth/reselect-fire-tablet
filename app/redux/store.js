@@ -1,51 +1,26 @@
 import { createStore, combineReducers } from 'redux';
 
-// Initial state for todos
+// Simplified initial state for todos
 const initialTodosState = {
   todos: [
     { id: 1, text: 'Learn Redux', completed: true, category: 'study' },
     { id: 2, text: 'Learn Reselect', completed: false, category: 'study' },
     { id: 3, text: 'Build a project', completed: false, category: 'work' },
     { id: 4, text: 'Go for a run', completed: true, category: 'health' },
-    { id: 5, text: 'Buy groceries', completed: false, category: 'errands' },
   ],
   filter: 'all', // 'all', 'completed', 'active'
-  categoryFilter: 'all', // 'all', 'study', 'work', 'health', 'errands'
+  categoryFilter: 'all', // 'all', 'study', 'work', 'health'
 };
 
-// Initial state for users
-const initialUsersState = {
-  users: [
-    { id: 1, name: 'John Doe', role: 'admin' },
-    { id: 2, name: 'Jane Smith', role: 'user' },
-    { id: 3, name: 'Bob Johnson', role: 'user' },
-  ],
-  currentUserId: 1,
-};
-
-// Initial state for UI
+// Simplified initial state for UI
 const initialUiState = {
   theme: 'light',
-  loading: false,
   sortOrder: 'asc',
 };
 
 // Todos reducer
 const todosReducer = (state = initialTodosState, action) => {
   switch (action.type) {
-    case 'ADD_TODO':
-      return {
-        ...state,
-        todos: [
-          ...state.todos,
-          {
-            id: state.todos.length + 1,
-            text: action.payload.text,
-            completed: false,
-            category: action.payload.category || 'uncategorized',
-          },
-        ],
-      };
     case 'TOGGLE_TODO':
       return {
         ...state,
@@ -70,31 +45,6 @@ const todosReducer = (state = initialTodosState, action) => {
   }
 };
 
-// Users reducer
-const usersReducer = (state = initialUsersState, action) => {
-  switch (action.type) {
-    case 'SET_CURRENT_USER':
-      return {
-        ...state,
-        currentUserId: action.payload,
-      };
-    case 'ADD_USER':
-      return {
-        ...state,
-        users: [
-          ...state.users,
-          {
-            id: state.users.length + 1,
-            name: action.payload.name,
-            role: action.payload.role || 'user',
-          },
-        ],
-      };
-    default:
-      return state;
-  }
-};
-
 // UI reducer
 const uiReducer = (state = initialUiState, action) => {
   switch (action.type) {
@@ -102,11 +52,6 @@ const uiReducer = (state = initialUiState, action) => {
       return {
         ...state,
         theme: action.payload,
-      };
-    case 'SET_LOADING':
-      return {
-        ...state,
-        loading: action.payload,
       };
     case 'SET_SORT_ORDER':
       return {
@@ -121,7 +66,6 @@ const uiReducer = (state = initialUiState, action) => {
 // Combine reducers
 const rootReducer = combineReducers({
   todos: todosReducer,
-  users: usersReducer,
   ui: uiReducer,
 });
 
